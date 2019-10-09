@@ -45,7 +45,7 @@
   {% endif %}
 
 <!-- google 统计 -->
-  {% if site.ga.id %}
+{% if site.ga.id %}
   <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -54,9 +54,35 @@
       ga('create', '{{site.ga.id}}', '{{site.ga.host}}');
       ga('send', 'pageview');
   </script>
-  {% endif %}
+{% endif %}
 
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  //some default pre init
+  var PB = PB || {};PB.q = PB.q || [];PB.events = PB.events || [];
+  
+  //********** Update these fields ********
+  //PushBots ApplicationId (required)
+  PB.app_id = "5d7b5efcb794126f4c337383";
+  //Your domain name, must be HTTPS or localhost  (required)
+  PB.domain = "https://zhuyb.top";
+  //Update and uncomment it if you are using custom safari certificate for your app
+  //PB.safari_push_id = "web.com.pushbots.main";
+  //****************************************
+  PB.logging_enabled = true;
+  PB.auto_subscribe = true;
+  //Custom worker and manifest URL
+  PB.worker_url = PB.domain + "/js/pushbots-worker.js";
+  PB.manifest_url = PB.domain + "/js/pushbots-push-manifest.json";
+  //Welcome notification message
+  PB.welcome = {title:"Welcome ",message:"Thanks for subscribing!", url :PB.domain};
+  function sendNotification(){
+        PB.register();
+        PB.q.push(["sendNotification", {title:"Hey ",message:"Why not?", url :"https://zhuyb.top"}]);
+  }
+</script>
+<script src="//cdn.pushbots.com/js/sdk.min.js" type="text/javascript" onload="PB.init()" async></script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
   (adsbygoogle = window.adsbygoogle || []).push({
     google_ad_client: "ca-pub-9005224472374751",
